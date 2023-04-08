@@ -40,8 +40,44 @@
             android:src="@drawable/ic_logout"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
-            android:background="@color/purple_500"/>
+            android:background="@color/main"/>
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <!--Add category -->
+        <Button
+            android:id="@+id/addCategoryBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Category"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/main"
+            android:minHeight="50dp"
+            android:textColor="@color/white"/>
+
+        <!--Add PDF-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addPdfFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_pdf"
+            app:tint="@color/white"
+            app:fabCustomSize="50dp"
+            android:backgroundTint="@color/main"/>
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>

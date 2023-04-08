@@ -1,25 +1,23 @@
 package com.example.storyapp2;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.util.PatternsCompat;
-
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.storyapp2.database.AccountDatabase;
 import com.example.storyapp2.databinding.ActivityRegisterBinding;
+import com.example.storyapp2.model.Account;
 
 
 public class RegisterActivity extends AppCompatActivity {
 
     //view binding
     private ActivityRegisterBinding binding;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +43,15 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private String name = "", email = "", password = "";
+    int role = 0;
 
     private void validateData() {
         //Trước khi tạo tài khoản, kiểm tra dữ liệu có hợp lệ k
         //get data
-        name = binding.nameEt.getText().toString().trim();
-        email = binding.emailEt.getText().toString().trim();
-        password = binding.passwordEt.getText().toString().trim();
-        String cPassword = binding.cPasswordEt.getText().toString().trim();
+        name = binding.edName.getText().toString().trim();
+        email = binding.edEmail.getText().toString().trim();
+        password = binding.edPassword.getText().toString().trim();
+        String cPassword = binding.edcPassword.getText().toString().trim();
 
         //validate data
         if (TextUtils.isEmpty(name)) {
@@ -63,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Enter password...", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(cPassword)) {
             Toast.makeText(this, "Confirm Password", Toast.LENGTH_SHORT).show();
-        } else if (!password.equals(cPassword)) {
+        } else if (!(password.equals(cPassword))) {
             Toast.makeText(this, "Password doesn't match...", Toast.LENGTH_SHORT).show();
         } else {
             //bat dau tao tai khoan
@@ -72,5 +71,13 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createUserAccount() {
+        Account account = new Account(name, email, password,role);
+        AccountDatabase.getInstance(this).accountDAO().insertAccount(account);
+        Toast.makeText(this, "Create account successfully", Toast.LENGTH_SHORT).show();
+
+        binding.edName.setText("");
+        binding.edEmail.setText("");
+        binding.edPassword.setText("");
+        binding.edcPassword.setText("");
     }
 }
