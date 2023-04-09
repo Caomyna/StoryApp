@@ -2,6 +2,7 @@ package com.example.storyapp2;
 
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -10,8 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.storyapp2.database.AccountDAO;
-import com.example.storyapp2.database.AccountDatabase;
+import com.example.storyapp2.database.StoryAppDatabase;
 import com.example.storyapp2.databinding.ActivityLoginBinding;
 import com.example.storyapp2.model.Account;
 import com.example.storyapp2.model.AccountAdapter;
@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     private void validateData() {
         //Trước khi tạo tài khoản, kiểm tra dữ liệu có hợp lệ k
         //get data
+
         email = binding.emailEt.getText().toString().trim();
         password = binding.passwordEt.getText().toString().trim();
 
@@ -72,20 +73,60 @@ public class LoginActivity extends AppCompatActivity {
         password = binding.passwordEt.getText().toString().trim();
 
         //để lấy dữ liệu, gọi tới getListAccount() để lấy tất cả account trong database
-        AccountDAO accountDAO = AccountDatabase.getInstance(this).accountDAO();
-        listAccount = accountDAO.getListAccount();
+        Cursor cursor = StoryAppDatabase.getInstance(this).accountDAO().getListAccount();
 
-        for (Account account : listAccount){
-            String emailDB = String.valueOf(listAccount.get(2));
-            String passwordDB = String.valueOf(listAccount.get(3));
+        while(cursor.moveToNext())
+        {
 
-            if (emailDB.equals(email) && passwordDB.equals(password)) {
+            //lấy dữ liệu và gán vào biến
+            String emailDB = cursor.getString(2);
+            String passwordDB = cursor.getString(3);
+            int roleDB = cursor.getInt(4);
+
+            if (emailDB.equals(email) && passwordDB.equals(password) && roleDB == 0) {
                 // lấy dữ liệu phân quyền và id
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String email = cursor.getString(2);
+                String password = cursor.getString(3);
+                int role = cursor.getInt(4);
 
+                Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, DashboardUserActivity.class);
+
+                intent.putExtra("id",id);
+                intent.putExtra("name", name);
+                intent.putExtra("email", email);
+                intent.putExtra("password",password);
+                intent.putExtra("role", role);
+
+                startActivity(intent);
+
+            }else if (emailDB.equals(email) && passwordDB.equals(password) && roleDB == 1){
+                // lấy dữ liệu phân quyền và id
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String email = cursor.getString(2);
+                String password = cursor.getString(3);
+                int role = cursor.getInt(4);
+
+                Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
+
+                intent.putExtra("id",id);
+                intent.putExtra("name", name);
+                intent.putExtra("email", email);
+                intent.putExtra("password",password);
+                intent.putExtra("role", role);
+
+                startActivity(intent);
+            }else {
+                Toast.makeText(this, "Incorrect email or password....", Toast.LENGTH_SHORT).show();
             }
         }
-        Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
 
+        cursor.moveToFirst();
+        cursor.close();
 
     }
 }

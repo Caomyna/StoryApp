@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.storyapp2.database.AccountDatabase;
+import com.example.storyapp2.database.StoryAppDatabase;
 import com.example.storyapp2.databinding.ActivityRegisterBinding;
 import com.example.storyapp2.model.Account;
 
@@ -71,8 +71,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createUserAccount() {
+        name = binding.edName.getText().toString().trim();
+        email = binding.edEmail.getText().toString().trim();
+        password = binding.edPassword.getText().toString().trim();
+
         Account account = new Account(name, email, password,role);
-        AccountDatabase.getInstance(this).accountDAO().insertAccount(account);
+        StoryAppDatabase.getInstance(this).accountDAO().insertAccount(account);
         Toast.makeText(this, "Create account successfully", Toast.LENGTH_SHORT).show();
 
         binding.edName.setText("");

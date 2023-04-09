@@ -8,21 +8,21 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.storyapp2.model.Account;
+import com.example.storyapp2.model.Category;
 
 @Dao
-public interface AccountDAO {
+public interface CategoryDAO {
 
-    @Query("SELECT * FROM account")
-    Cursor getListAccount();
+    @Query("SELECT * FROM category")
+    Cursor getListCategory();
 //    List<Account> getListAccount();
 
     @Insert()
-    void insertAccount(Account account);
+    void insertCategory(Category category);
 
     @Update
-    void updateAccount(Account account);
+    void updateCategory(Category category);
 
     @Delete
-    void deleteAccount(Account account);
+    void deleteCategory(Category category);
 }
