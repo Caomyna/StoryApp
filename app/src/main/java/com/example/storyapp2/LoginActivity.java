@@ -2,7 +2,6 @@ package com.example.storyapp2;
 
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -72,61 +71,27 @@ public class LoginActivity extends AppCompatActivity {
         email = binding.emailEt.getText().toString().trim();
         password = binding.passwordEt.getText().toString().trim();
 
-        //để lấy dữ liệu, gọi tới getListAccount() để lấy tất cả account trong database
-        Cursor cursor = StoryAppDatabase.getInstance(this).accountDAO().getListAccount();
+        Account accountUser = new Account(null,email, password, 0);
+        Account accountAdmin = new Account(null,email, password, 1);
 
-        while(cursor.moveToNext())
-        {
-
-            //lấy dữ liệu và gán vào biến
-            String emailDB = cursor.getString(2);
-            String passwordDB = cursor.getString(3);
-            int roleDB = cursor.getInt(4);
-
-            if (emailDB.equals(email) && passwordDB.equals(password) && roleDB == 0) {
-                // lấy dữ liệu phân quyền và id
-                int id = cursor.getInt(0);
-                String name = cursor.getString(1);
-                String email = cursor.getString(2);
-                String password = cursor.getString(3);
-                int role = cursor.getInt(4);
-
-                Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LoginActivity.this, DashboardUserActivity.class);
-
-                intent.putExtra("id",id);
-                intent.putExtra("name", name);
-                intent.putExtra("email", email);
-                intent.putExtra("password",password);
-                intent.putExtra("role", role);
-
-                startActivity(intent);
-
-            }else if (emailDB.equals(email) && passwordDB.equals(password) && roleDB == 1){
-                // lấy dữ liệu phân quyền và id
-                int id = cursor.getInt(0);
-                String name = cursor.getString(1);
-                String email = cursor.getString(2);
-                String password = cursor.getString(3);
-                int role = cursor.getInt(4);
-
-                Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
-
-                intent.putExtra("id",id);
-                intent.putExtra("name", name);
-                intent.putExtra("email", email);
-                intent.putExtra("password",password);
-                intent.putExtra("role", role);
-
-                startActivity(intent);
-            }else {
-                Toast.makeText(this, "Incorrect email or password....", Toast.LENGTH_SHORT).show();
-            }
+        if(isAccountExist(accountUser)){
+            //da ton tai
+            Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(LoginActivity.this, DashboardUserActivity.class));
+            return;
+        } else if (isAccountExist(accountAdmin)) {
+            Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(LoginActivity.this, DashboardAdminActivity.class));
+            return;
+        }else {
+            Toast.makeText(this, "Email or password is incorrect !!", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        cursor.moveToFirst();
-        cursor.close();
+    }
 
+    private boolean isAccountExist(Account account){
+        List<Account> list = StoryAppDatabase.getInstance(this).accountDAO().checkAccount(account.getEmail(), account.getPassword(), account.getRole());
+        return list != null && !list.isEmpty();
     }
 }

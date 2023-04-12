@@ -76,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
         password = binding.edPassword.getText().toString().trim();
 
         Account account = new Account(name, email, password,role);
+
         StoryAppDatabase.getInstance(this).accountDAO().insertAccount(account);
         Toast.makeText(this, "Create account successfully", Toast.LENGTH_SHORT).show();
 
