@@ -23,6 +23,10 @@ public class Story {
     @ColumnInfo(name = "image")
     private String image;
 
+//    @ForeignKey()
+//    @ColumnInfo(name = "idCategory")
+//    private int idCategory;
+
     public Story(String title, String author, String content, String image) {
         this.title = title;
         this.author = author;

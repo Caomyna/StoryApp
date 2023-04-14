@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isAccountExist(Account account){
-        List<Account> list = StoryAppDatabase.getInstance(this).accountDAO().checkAccount(account.getEmail(), account.getPassword(), account.getRole());
-        return list != null && !list.isEmpty();
+        listAccount = StoryAppDatabase.getInstance(this).accountDAO().checkAccount(account.getEmail(), account.getPassword(), account.getRole());
+        return listAccount != null && !listAccount.isEmpty();
     }
 }

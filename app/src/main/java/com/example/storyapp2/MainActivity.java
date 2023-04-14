@@ -1,10 +1,10 @@
 package com.example.storyapp2;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.storyapp2.databinding.ActivityMainBinding;
 
@@ -34,5 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, DashboardUserActivity.class));
             }
         });
+
     }
+
 }

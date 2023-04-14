@@ -52,10 +52,20 @@
         android:layout_below="@id/toolbarRL"
         android:layout_margin="5dp"
         android:background="@android:color/transparent"
+        app:tabTextColor="@color/gray1"
         app:tabIndicatorFullWidth="false"
-        app:tabIndicatorHeight="8dp"
+        app:tabIndicatorHeight="4dp"
+        app:tabIndicatorColor="@color/main"
+        app:tabSelectedTextColor="@color/main"
         app:tabMode="scrollable"
         app:tabUnboundedRipple="false"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tablayout"
+        />
 
 
 

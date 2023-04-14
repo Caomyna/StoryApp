@@ -2,6 +2,8 @@
     <string name="app_name">Story App</string>
     <string name="new_user_signup">New User? <b> SignUp</b></string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="story_user_fragment">fragment 1</string>
+    <string name="story_user_fragment_2">fragment 2</string>
+    <string name="story_user_fragment_3">fragment 3</string>
 
 </resources>

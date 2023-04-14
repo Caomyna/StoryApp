@@ -5,17 +5,34 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
+import com.example.storyapp2.database.StoryAppDatabase;
 import com.example.storyapp2.databinding.ActivityDashboardUserBinding;
+import com.example.storyapp2.model.Category;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashboardUserActivity extends AppCompatActivity {
 
+    private ViewPagerAdapter viewPagerAdapter;
+    private List<Category> listCategory;
     private ActivityDashboardUserBinding binding;
+
+
+    public DashboardUserActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityDashboardUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        setupViewAdapter(binding.viewPager);
+
 
         //handle click, logout
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -29,4 +46,22 @@ public class DashboardUserActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void setupViewAdapter(ViewPager viewPager) {
+
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, this);
+
+        listCategory = new ArrayList<>();
+        listCategory = StoryAppDatabase.getInstance(this).categoryDAO().getListCategory();
+
+        //Load from database
+        for (Category category : listCategory) {
+
+            viewPagerAdapter.addFragment(new StoryUserFragment(), category.getNameCategory());
+
+        }
+        viewPager.setAdapter(viewPagerAdapter);
+        binding.tablayout.setupWithViewPager(binding.viewPager);
+    }
+
 }
