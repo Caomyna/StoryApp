@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.storyapp2.R;
 import com.example.storyapp2.StoryDetailActivity;
-import com.example.storyapp2.StoryUserFragment;
 import com.example.storyapp2.databinding.RowStoryBinding;
 import com.example.storyapp2.model.Story;
 import com.squareup.picasso.Picasso;
@@ -24,10 +23,19 @@ public class AdapterStoryUser extends RecyclerView.Adapter<AdapterStoryUser.Hold
 
     private Context context;
     private List<Story> listStory;
-    private StoryUserFragment fragment;
     private RowStoryBinding binding;
+    private OnItemClickListener onClick;
 
     private static final String TAG = "ADAPTER_STORY_USER_TAG";
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onClick) {
+
+        this.onClick = onClick;
+    }
 
     public AdapterStoryUser(Context context,List<Story> listStory) {
         this.context = context;
@@ -55,6 +63,7 @@ public class AdapterStoryUser extends RecyclerView.Adapter<AdapterStoryUser.Hold
         if (story == null) {
             return;
         }
+        Integer idStory = story.getIdStory();
         String title = story.getTitle();
         String author = story.getAuthor();
         String image = story.getImage();
@@ -72,7 +81,12 @@ public class AdapterStoryUser extends RecyclerView.Adapter<AdapterStoryUser.Hold
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, StoryDetailActivity.class);
-//                intent.putExtra("idStory",idStory);
+                intent.putExtra("idStory", idStory);
+                intent.putExtra("title", title);
+                intent.putExtra("author", author);
+                intent.putExtra("content", content);
+                intent.putExtra("image", image);
+                context.startActivity(intent);
 
             }
         });

@@ -35,6 +35,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         void deleteCategory(Category category);
     }
     public void setOnItemClickListener(OnItemClickListener onClick) {
+
         this.onClick = onClick;
     }
 

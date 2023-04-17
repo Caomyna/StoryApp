@@ -41,7 +41,15 @@ public class DashboardUserActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setupViewAdapter(binding.viewPager);
-//        getListStory();
+
+        //nhận dữ liệu ở màn hình đăng nhập gửi
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("id", 0);
+        String name = intent.getStringExtra("name");
+        String email = intent.getStringExtra("email");
+        String password = intent.getStringExtra("password");
+
+
         //handle click, logout
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +61,8 @@ public class DashboardUserActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
     }
 
     private void setupViewAdapter(ViewPager viewPager) {
