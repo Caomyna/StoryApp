@@ -14,10 +14,14 @@ public class Category {
     @ColumnInfo(name = "nameCategory")
     private String nameCategory;
 
+
     public Category(String nameCategory) {
         this.nameCategory = nameCategory;
     }
 
+    public Category(){
+
+    }
     public int getIdCategory() {
         return idCategory;
     }

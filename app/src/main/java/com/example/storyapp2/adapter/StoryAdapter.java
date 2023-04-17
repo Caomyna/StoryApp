@@ -1,4 +1,4 @@
-package com.example.storyapp2.model;
+package com.example.storyapp2.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.storyapp2.R;
+import com.example.storyapp2.model.Story;
 
 import java.util.List;
 

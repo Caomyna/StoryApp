@@ -1,4 +1,4 @@
-package com.example.storyapp2;
+package com.example.storyapp2.adapter;
 
 import android.content.Context;
 
@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+
+import com.example.storyapp2.StoryUserFragment;
 
 import java.util.ArrayList;
 

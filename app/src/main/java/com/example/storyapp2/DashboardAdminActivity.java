@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.storyapp2.database.StoryAppDatabase;
 import com.example.storyapp2.databinding.ActivityDashboardAdminBinding;
 import com.example.storyapp2.model.Category;
-import com.example.storyapp2.model.CategoryAdapter;
+import com.example.storyapp2.adapter.CategoryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +26,6 @@ public class DashboardAdminActivity extends AppCompatActivity {
     private CategoryAdapter categoryAdapter;
     private List<Category> listCategory;
     private RecyclerView recyclerView;
-
-    private StoryAppDatabase storyAppDatabase;
     //view binding
     private ActivityDashboardAdminBinding binding;
 
@@ -46,8 +44,6 @@ public class DashboardAdminActivity extends AppCompatActivity {
         recyclerView.setAdapter(categoryAdapter);
 
         loadData();
-
-//        showListCategory();
 
         //search
         binding.searchEt.addTextChangedListener(new TextWatcher() {

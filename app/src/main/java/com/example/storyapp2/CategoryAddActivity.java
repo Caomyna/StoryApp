@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.storyapp2.database.StoryAppDatabase;
 import com.example.storyapp2.databinding.ActivityCategoryAddBinding;
 import com.example.storyapp2.model.Category;
-import com.example.storyapp2.model.CategoryAdapter;
+import com.example.storyapp2.adapter.CategoryAdapter;
 
 import java.util.List;
 

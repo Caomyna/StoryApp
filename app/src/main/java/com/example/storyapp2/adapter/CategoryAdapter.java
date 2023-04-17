@@ -1,4 +1,4 @@
-package com.example.storyapp2.model;
+package com.example.storyapp2.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.storyapp2.FilterCategory;
 import com.example.storyapp2.databinding.RowCategoryBinding;
+import com.example.storyapp2.model.Category;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> implements Filterable {

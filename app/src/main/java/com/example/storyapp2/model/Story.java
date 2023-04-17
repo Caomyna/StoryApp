@@ -23,15 +23,15 @@ public class Story {
     @ColumnInfo(name = "image")
     private String image;
 
-//    @ForeignKey()
-//    @ColumnInfo(name = "idCategory")
-//    private int idCategory;
+    @ColumnInfo(name = "idCategory")
+    private int idCategory;
 
-    public Story(String title, String author, String content, String image) {
+    public Story(String title, String author, String content, String image, int idCategory) {
         this.title = title;
         this.author = author;
         this.content = content;
         this.image = image;
+        this.idCategory = idCategory;
     }
 
     public int getIdStory() {
@@ -80,5 +80,14 @@ public class Story {
     public void setImage(String image) {
 
         this.image = image;
+    }
+
+    public int getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(int idCategory) {
+
+        this.idCategory = idCategory;
     }
 }

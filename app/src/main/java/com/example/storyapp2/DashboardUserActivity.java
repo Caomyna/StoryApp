@@ -4,13 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.storyapp2.adapter.AdapterStoryUser;
+import com.example.storyapp2.adapter.ViewPagerAdapter;
 import com.example.storyapp2.database.StoryAppDatabase;
 import com.example.storyapp2.databinding.ActivityDashboardUserBinding;
 import com.example.storyapp2.model.Category;
+import com.example.storyapp2.model.Story;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +24,11 @@ public class DashboardUserActivity extends AppCompatActivity {
 
     private ViewPagerAdapter viewPagerAdapter;
     private List<Category> listCategory;
-    private ActivityDashboardUserBinding binding;
+    private AdapterStoryUser adapterStoryUser;
+    private List<Story> listStory;
+    private RecyclerView recyclerView;
+    private
+    @NonNull ActivityDashboardUserBinding binding;
 
 
     public DashboardUserActivity() {
@@ -32,8 +41,7 @@ public class DashboardUserActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setupViewAdapter(binding.viewPager);
-
-
+//        getListStory();
         //handle click, logout
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +56,6 @@ public class DashboardUserActivity extends AppCompatActivity {
     }
 
     private void setupViewAdapter(ViewPager viewPager) {
-
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, this);
 
         listCategory = new ArrayList<>();
@@ -62,6 +69,8 @@ public class DashboardUserActivity extends AppCompatActivity {
         }
         viewPager.setAdapter(viewPagerAdapter);
         binding.tablayout.setupWithViewPager(binding.viewPager);
+
     }
+
 
 }

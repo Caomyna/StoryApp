@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.storyapp2.database.StoryAppDatabase;
 import com.example.storyapp2.databinding.ActivityLoginBinding;
 import com.example.storyapp2.model.Account;
-import com.example.storyapp2.model.AccountAdapter;
+import com.example.storyapp2.adapter.AccountAdapter;
 
 import java.util.List;
 

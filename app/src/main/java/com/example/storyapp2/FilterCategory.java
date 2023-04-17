@@ -3,7 +3,7 @@ package com.example.storyapp2;
 import android.widget.Filter;
 
 import com.example.storyapp2.model.Category;
-import com.example.storyapp2.model.CategoryAdapter;
+import com.example.storyapp2.adapter.CategoryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

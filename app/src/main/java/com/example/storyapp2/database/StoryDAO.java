@@ -16,6 +16,9 @@ public interface StoryDAO {
     @Query("SELECT * FROM story")
     List<Story> getListStory();
 
+    @Query("SELECT * FROM story WHERE idCategory = :idCategory")
+    List<Story> getListStoryByID(int idCategory);
+
     @Insert()
     void insertStory(Story story);
 
@@ -24,4 +27,7 @@ public interface StoryDAO {
 
     @Delete
     void deleteStory(Story story);
+
+//    @Query("DELETE FROM story WHERE idStory = :idStory")
+//    void delete(int idStory);
 }

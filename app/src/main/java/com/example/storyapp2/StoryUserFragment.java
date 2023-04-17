@@ -6,6 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.storyapp2.adapter.AdapterStoryUser;
+import com.example.storyapp2.database.StoryAppDatabase;
+import com.example.storyapp2.model.Story;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,19 +31,14 @@ public class StoryUserFragment extends Fragment {
     private Integer mParam1;
     private String mParam2;
 
-    public StoryUserFragment() {
-        // Required empty public constructor
-    }
+    private AdapterStoryUser adapterStoryUser;
+    private List<Story> listStory;
+    private RecyclerView recyclerView;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param idCategory Parameter 1.
-     * @param nameCategory Parameter 2.
-     * @return A new instance of fragment StoryUserFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+//    public StoryUserFragment() {
+//        // Required empty public constructor
+//    }
+
     public static StoryUserFragment newInstance(int idCategory, String nameCategory) {
         StoryUserFragment fragment = new StoryUserFragment();
         Bundle args = new Bundle();
@@ -58,6 +61,20 @@ public class StoryUserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_story_user, container, false);
+        View view = inflater.inflate(R.layout.fragment_story_user, container, false);
+        recyclerView = view.findViewById(R.id.storiesRv);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        adapterStoryUser = new AdapterStoryUser(getContext(),listStory);
+//        adapterStoryUser.setData(getListStory());
+//        recyclerView.setAdapter(adapterStoryUser);
+        //        listStory = new ArrayList<>();
+        listStory = StoryAppDatabase.getInstance(getContext()).storyDAO().getListStory();
+        adapterStoryUser = new AdapterStoryUser(getContext(),listStory);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(adapterStoryUser);
+        adapterStoryUser.setData(listStory);
+        return view;
     }
+
 }

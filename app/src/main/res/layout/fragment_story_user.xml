@@ -20,6 +20,7 @@
         android:padding="10dp"
         android:textColorHint="@color/gray1"/>
 
+<!--    Load stories-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/storiesRv"
         android:layout_width="match_parent"
@@ -28,6 +29,6 @@
         app:stackFromEnd="true"
         app:reverseLayout="true"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem=""/>
+        tools:listitem="@layout/row_story"/>
 
 </FrameLayout>
