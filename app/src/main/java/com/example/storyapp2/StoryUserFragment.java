@@ -45,9 +45,9 @@ public class StoryUserFragment extends Fragment {
     private FragmentStoryUserBinding binding;
     private static final String TAG = "STORIES_USER_TAG";
 
-//    public StoryUserFragment() {
-//        // Required empty public constructor
-//    }
+    public StoryUserFragment() {
+        // Required empty public constructor
+    }
 
     public static StoryUserFragment newInstance(int idCategory, String nameCategory) {
         StoryUserFragment fragment = new StoryUserFragment();
@@ -61,9 +61,13 @@ public class StoryUserFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
+            Log.d("StoryUserFragment", "getArguments() is not null");
             idCategory = getArguments().getInt("idCategory");
             nameCategory = getArguments().getString("nameCategory");
+        } else {
+            Log.d("StoryUserFragment", "getArguments() is null");
         }
 
         adapterStoryUser = new AdapterStoryUser(getContext(),listStory);
@@ -93,17 +97,18 @@ public class StoryUserFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentStoryUserBinding.inflate(LayoutInflater.from(getContext()), container, false);
         Log.d(TAG,"onCreateView: Category: "+nameCategory);
+
         //hiển thị list truyện theo thể loại
-        loadStoryByCategory();
+        loadStoryByCategory(idCategory);
 
         return binding.getRoot();
     }
 
-    private void loadStoryByCategory() {
+    private void loadStoryByCategory(int idCategory) {
+
         listStory = new ArrayList<>();
         recyclerView = binding.storiesRv;
-
-        listStory = StoryAppDatabase.getInstance(getContext()).storyDAO().getListStory();
+        listStory = StoryAppDatabase.getInstance(getContext()).storyDAO().getListStoryByID(idCategory);
         adapterStoryUser = new AdapterStoryUser(getContext(),listStory);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapterStoryUser);

@@ -2,8 +2,12 @@
     <string name="app_name">Story App</string>
     <string name="new_user_signup">New User? <b> SignUp</b></string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="story_user_fragment">fragment 1</string>
-    <string name="story_user_fragment_2">fragment 2</string>
-    <string name="story_user_fragment_3">fragment 3</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_favorite">Favorite</string>
+    <string name="nav_logout">Logout</string>
 
+    <string name="navigation_drawer_open">Open navigation</string>
+    <string name="navigation_drawer_close">Close navigation</string>
+
+    <string name="action_search">Search</string>
 </resources>

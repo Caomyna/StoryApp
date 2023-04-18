@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,12 +19,14 @@ import com.example.storyapp2.databinding.RowStoryBinding;
 import com.example.storyapp2.model.Story;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterStoryUser extends RecyclerView.Adapter<AdapterStoryUser.HolderStoryUser>{
+public class AdapterStoryUser extends RecyclerView.Adapter<AdapterStoryUser.HolderStoryUser> implements Filterable {
 
     private Context context;
     private List<Story> listStory;
+    private List<Story> listStoryOld;
     private RowStoryBinding binding;
     private OnItemClickListener onClick;
 
@@ -40,6 +44,7 @@ public class AdapterStoryUser extends RecyclerView.Adapter<AdapterStoryUser.Hold
     public AdapterStoryUser(Context context,List<Story> listStory) {
         this.context = context;
         this.listStory = listStory;
+        this.listStoryOld = listStory;
     }
 
     public void setData(List<Story> list){
@@ -112,5 +117,39 @@ public class AdapterStoryUser extends RecyclerView.Adapter<AdapterStoryUser.Hold
             imageView = binding.image;
 
         }
+    }
+
+
+    //Search
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String strSearch = charSequence.toString();
+                if (strSearch.isEmpty()) {
+                    listStory = listStoryOld;
+                }else {
+                    List<Story> list = new ArrayList<>();
+                    for (Story story : listStoryOld) {
+                        if (story.getTitle().toLowerCase().contains(strSearch.toLowerCase())){
+                            list.add(story);
+                        }
+                    }
+
+                    listStory = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = listStory;
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                listStory = (List<Story>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }
