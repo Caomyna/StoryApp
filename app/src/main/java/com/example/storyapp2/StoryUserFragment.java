@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.storyapp2.adapter.AdapterStoryUser;
+import com.example.storyapp2.adapter.StoryAdapter;
 import com.example.storyapp2.database.StoryAppDatabase;
 import com.example.storyapp2.databinding.FragmentStoryUserBinding;
 import com.example.storyapp2.model.Story;
@@ -38,7 +38,7 @@ public class StoryUserFragment extends Fragment {
     private int idCategory;
     private String nameCategory;
 
-    private AdapterStoryUser adapterStoryUser;
+    private StoryAdapter storyAdapter;
     private List<Story> listStory;
     private RecyclerView recyclerView;
 
@@ -70,8 +70,8 @@ public class StoryUserFragment extends Fragment {
             Log.d("StoryUserFragment", "getArguments() is null");
         }
 
-        adapterStoryUser = new AdapterStoryUser(getContext(),listStory);
-        adapterStoryUser.setOnItemClickListener(new AdapterStoryUser.OnItemClickListener() {
+        storyAdapter = new StoryAdapter(getContext(),listStory);
+        storyAdapter.setOnItemClickListener(new StoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 Story story = listStory.get(position);
@@ -108,11 +108,12 @@ public class StoryUserFragment extends Fragment {
 
         listStory = new ArrayList<>();
         recyclerView = binding.storiesRv;
+
         listStory = StoryAppDatabase.getInstance(getContext()).storyDAO().getListStoryByID(idCategory);
-        adapterStoryUser = new AdapterStoryUser(getContext(),listStory);
+        storyAdapter = new StoryAdapter(getContext(),listStory);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapterStoryUser);
-        adapterStoryUser.setData(listStory);
+        recyclerView.setAdapter(storyAdapter);
+        storyAdapter.setData(listStory);
 
     }
 

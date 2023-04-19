@@ -4,25 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".StoryUserFragment">
+    tools:context=".FavoriteFragment">
 
-<!--  Search -->
-<!--    <EditText-->
-<!--        android:id="@+id/searchEt"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="10dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:layout_marginEnd="10dp"-->
-<!--        android:background="@color/white"-->
-<!--        android:drawableStart="@drawable/ic_search"-->
-<!--        android:hint="Search"-->
-<!--        android:padding="10dp"-->
-<!--        android:textColorHint="@color/gray1"/>-->
-
-<!--    Load stories-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/storiesRv"
+        android:id="@+id/favorite_stories"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"

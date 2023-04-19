@@ -1,14 +1,14 @@
 package com.example.storyapp2.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.storyapp2.R;
+import com.example.storyapp2.databinding.HeaderMenuBinding;
 import com.example.storyapp2.model.Account;
 
 import java.util.List;
@@ -16,6 +16,8 @@ import java.util.List;
 public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountViewHolder>{
 
     private List<Account> listAccount;
+    private HeaderMenuBinding binding;
+    private Context context;
 
     public void setData(List<Account> list){
         this.listAccount = list;
@@ -25,8 +27,9 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
     @NonNull
     @Override
     public AccountViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_story, parent,false);
-        return new AccountViewHolder(view);
+        binding = HeaderMenuBinding.inflate(LayoutInflater.from(context), parent,false);
+
+        return new AccountViewHolder(binding.getRoot());
     }
 
     @Override
@@ -35,8 +38,9 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         if (account == null){
             return;
         }
-        holder.tvName.setText(account.getName());
-        holder.tvPassword.setText(account.getPassword());
+
+//        holder.nameTv.setText(account.getName());
+//        holder.emailTv.setText(account.getEmail());
     }
 
     @Override
@@ -48,13 +52,8 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
     }
 
     public class AccountViewHolder extends RecyclerView.ViewHolder{
-        private TextView tvName;
-        private TextView tvPassword;
         public AccountViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            tvName = itemView.findViewById(R.id.tvName);
-            tvPassword = itemView.findViewById(R.id.tvPassword);
         }
 
     }

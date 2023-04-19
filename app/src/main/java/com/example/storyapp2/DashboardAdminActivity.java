@@ -13,10 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.storyapp2.adapter.CategoryAdapter;
 import com.example.storyapp2.database.StoryAppDatabase;
 import com.example.storyapp2.databinding.ActivityDashboardAdminBinding;
 import com.example.storyapp2.model.Category;
-import com.example.storyapp2.adapter.CategoryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

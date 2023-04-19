@@ -6,21 +6,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.storyapp2.StoryUserFragment;
 
 import java.util.ArrayList;
 
-public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+public class ViewPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<StoryUserFragment> fragmentsList = new ArrayList<>();
     private ArrayList<String> fragmentTitleList = new ArrayList<>();
     private Context context;
 
 
-    public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior, Context context) {
-        super(fm, behavior);
-        this.context = context;
+    public ViewPagerAdapter(FragmentManager fm) {
+        super(fm);
 
     }
 

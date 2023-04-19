@@ -73,6 +73,7 @@
                 <!-- Table -->
                 
                 <TableLayout
+                    android:id="@+id/tablelayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/titleTv"
@@ -104,6 +105,16 @@
                     </TableRow>
 
                 </TableLayout>
+
+                <ImageButton
+                    android:id="@+id/favoriteBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imageIv"
+                    android:layout_below="@+id/tablelayout"
+                    android:padding="20dp"
+                    android:src="@drawable/ic_favorite_border"
+                    android:background="@color/white"/>
 
             </RelativeLayout>
 

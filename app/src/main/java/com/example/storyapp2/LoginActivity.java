@@ -10,10 +10,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.storyapp2.adapter.AccountAdapter;
 import com.example.storyapp2.database.StoryAppDatabase;
 import com.example.storyapp2.databinding.ActivityLoginBinding;
 import com.example.storyapp2.model.Account;
-import com.example.storyapp2.adapter.AccountAdapter;
 
 import java.util.List;
 
@@ -77,7 +77,9 @@ public class LoginActivity extends AppCompatActivity {
         if(isAccountExist(accountUser)){
             //da ton tai
             Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(LoginActivity.this, DashboardUserActivity.class));
+            //truyền dữ liệu
+            Intent intent = new Intent(LoginActivity.this, DashboardUserActivity.class);
+            startActivity(intent);
             return;
         } else if (isAccountExist(accountAdmin)) {
             Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
