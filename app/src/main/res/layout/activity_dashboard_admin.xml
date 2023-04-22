@@ -14,25 +14,6 @@
         android:layout_height="?actionBarSize"
         android:background="@drawable/shape_toolbar2">
 
-        <TextView
-            android:id="@+id/titleTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_centerHorizontal="true"
-            android:text="Dashboard Admin"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
-
-        <TextView
-            android:id="@+id/subTitleTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/titleTv"
-            android:layout_centerHorizontal="true"
-            android:text="newsapp@gmail.com"
-            android:textColor="@color/white"/>
-
         <ImageButton
             android:id="@+id/logoutBtn"
             android:layout_width="wrap_content"
@@ -95,15 +76,17 @@
             android:minHeight="50dp"
             android:textColor="@color/white"/>
 
-        <!--Add PDF-->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addPdfFab"
+
+        <Button
+            android:id="@+id/addStoryBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_pdf"
-            app:tint="@color/white"
-            app:fabCustomSize="50dp"
-            android:backgroundTint="@color/main"/>
+            android:text="Add Story"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/main"
+            android:minHeight="50dp"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 

@@ -31,7 +31,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
 
     public interface OnItemClickListener{
-        void onClickEdit(int pos);
+        void onClickItemCategory(int id);
         void deleteCategory(Category category);
     }
     public void setOnItemClickListener(OnItemClickListener onClick) {
@@ -40,9 +40,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
 
-    public CategoryAdapter (Context context, List list){
-        this.context = context;
+    public CategoryAdapter (List list, OnItemClickListener listener){
         this.listCategory = list;
+        this.onClick = listener;
         this.filterList = list;
     }
 
@@ -55,7 +55,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public CategoryAdapter.CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //bind row_category.xml
-        binding = RowCategoryBinding.inflate(LayoutInflater.from(context), parent,false);
+        binding = RowCategoryBinding.inflate(LayoutInflater.from(parent.getContext()), parent,false);
 
         return new CategoryViewHolder(binding.getRoot());
     }
@@ -70,8 +70,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
 
         //set data
+        int idCategory = category.getIdCategory();
         String nameCategory = category.getNameCategory();
         holder.categoryTv.setText(nameCategory);
+
+        //itemLayout
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClick.onClickItemCategory(idCategory);
+            }
+        });
 
         //handle click delete
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -101,10 +110,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     //View holder class to hold IU views for row_category.xml
     public class CategoryViewHolder extends RecyclerView.ViewHolder{
-
-       //ui views of row_category.xml
-        public TextView categoryTv;
-        public ImageButton deleteBtn;
+        private TextView categoryTv;
+        private ImageButton deleteBtn;
         public CategoryViewHolder(@NonNull View itemView) {
 
             super(itemView);
@@ -112,6 +119,4 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             deleteBtn = binding.deleteBtn;
         }
     }
-
-
 }

@@ -1,7 +1,5 @@
 package com.example.storyapp2.adapter;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -15,8 +13,6 @@ import java.util.ArrayList;
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<StoryUserFragment> fragmentsList = new ArrayList<>();
     private ArrayList<String> fragmentTitleList = new ArrayList<>();
-    private Context context;
-
 
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);

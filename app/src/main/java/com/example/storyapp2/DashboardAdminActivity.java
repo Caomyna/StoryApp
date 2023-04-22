@@ -26,7 +26,6 @@ public class DashboardAdminActivity extends AppCompatActivity {
     private CategoryAdapter categoryAdapter;
     private List<Category> listCategory;
     private RecyclerView recyclerView;
-    //view binding
     private ActivityDashboardAdminBinding binding;
 
     @Override
@@ -35,7 +34,17 @@ public class DashboardAdminActivity extends AppCompatActivity {
         binding = ActivityDashboardAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        categoryAdapter = new CategoryAdapter(this, listCategory);
+        categoryAdapter = new CategoryAdapter(listCategory, new CategoryAdapter.OnItemClickListener() {
+            @Override
+            public void onClickItemCategory(int id) {
+                onClickShowStory(id);
+            }
+
+            @Override
+            public void deleteCategory(Category category) {
+                clickDeleteCategory(category);
+            }
+        });
         listCategory = new ArrayList<>();
         categoryAdapter.setData(listCategory);
 
@@ -81,7 +90,7 @@ public class DashboardAdminActivity extends AppCompatActivity {
         });
 
 
-        //handle click add
+        //handle click add Category
         binding.addCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,21 +99,25 @@ public class DashboardAdminActivity extends AppCompatActivity {
             }
         });
 
-        categoryAdapter.setOnItemClickListener(new CategoryAdapter.OnItemClickListener() {
+        //add story
+        binding.addStoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClickEdit(int pos) {
-
-            }
-
-            @Override
-            public void deleteCategory(Category category) {
-
-                clickDeleteCategory(category);
+            public void onClick(View view) {
+                Intent intent = new Intent(DashboardAdminActivity.this, StoryAddActivity.class);
+                startActivity(intent);
             }
         });
 
-        loadData();
 
+
+    }
+
+    private void onClickShowStory(int idCategory) {
+        Intent intent = new Intent(this, AdminListStoryActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("idCategory",idCategory);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     private void loadData(){
@@ -115,7 +128,7 @@ public class DashboardAdminActivity extends AppCompatActivity {
     //handel click delete
     private void clickDeleteCategory(final Category category) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete").setMessage("Bạn có chắc chắn muốn xóa?")
+          builder.setTitle("Delete").setMessage("Bạn có chắc chắn muốn xóa?")
                 .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -131,4 +144,8 @@ public class DashboardAdminActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

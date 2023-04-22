@@ -24,10 +24,9 @@
 
         <ImageView
             android:id="@+id/iconIv"
-            android:layout_width="230dp"
-            android:layout_height="230dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/backBtn"
             android:src="@drawable/logo"/>
 
 <!--        Title-->
@@ -64,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="270dp"
         app:hintEnabled="false">
 
         <EditText
@@ -72,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_edittext1"
-            android:drawableStart="@drawable/ic_pdf"
+            android:drawableStart="@drawable/ic_book"
             android:drawablePadding="10dp"
             android:hint="Story Title"
             android:textSize="16sp"
@@ -99,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_edittext1"
-            android:drawableStart="@drawable/ic_pdf"
+            android:drawableStart="@drawable/ic_author"
             android:drawablePadding="10dp"
             android:hint="Author"
             android:inputType="textPersonName|textCapWords"
@@ -112,58 +111,91 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 <!--    choose category-->
+
     <TextView
         android:id="@+id/categoryTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/authorTil"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginTop="5dp"
-        android:hint="Story Category"
         android:background="@drawable/shape_edittext1"
         android:drawableStart="@drawable/ic_category"
         android:drawableEnd="@drawable/ic_down"
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
+        android:hint="Story Category"
         android:padding="10dp"
         android:textColor="@color/black"
         android:textColorHint="@color/gray1"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/imageTv"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/contentTil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/categoryTv"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
+        android:layout_below="@+id/categoryTv"
         android:layout_marginTop="5dp"
-        android:hint="Image"
-        android:background="@drawable/shape_edittext1"
-        android:drawableStart="@drawable/ic_attach"
-        android:drawablePadding="10dp"
-        android:gravity="center_vertical"
-        android:padding="10dp"
-        android:textColorHint="@color/gray1"
-        android:textSize="16sp"/>
+        app:hintEnabled="false">
 
-    <ImageView
-        android:id="@+id/imageIv"
+        <EditText
+            android:id="@+id/contentEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_edittext1"
+            android:drawableStart="@drawable/ic_author"
+            android:drawablePadding="10dp"
+            android:hint="Content"
+            android:inputType="textPersonName|textCapWords"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray1"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ImageTil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_below="@+id/contentTil"
+        android:layout_marginTop="5dp"
+        app:hintEnabled="false">
+
+        <EditText
+            android:id="@+id/imageEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_edittext1"
+            android:drawableStart="@drawable/ic_attach"
+            android:drawablePadding="10dp"
+            android:hint="Image"
+            android:inputType="textPersonName|textCapWords"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray1"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 <!--    Button upload pdf-->
     <Button
         android:id="@+id/submitBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageTv"
+        android:layout_below="@+id/ImageTil"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="5dp"
-        android:text="Upload"
+        android:text="Add"
         android:textColor="@color/white"
         android:backgroundTint="@color/main"/>
 

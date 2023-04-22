@@ -86,7 +86,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="5dp"
                             android:layout_marginTop="10dp"
-                            android:textSize="15sp"
+                            android:textSize="16sp"
                             android:textColor="@color/black"
                             android:text="Tác giả: "
                             style="@style/TextAppearance.MaterialComponents.Caption"/>
@@ -97,7 +97,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="5dp"
                             android:layout_marginTop="10dp"
-                            android:textSize="15sp"
+                            android:textSize="16sp"
                             android:textColor="@color/black"
                             android:text="N/A"
                             style="@style/TextAppearance.MaterialComponents.Caption"/>
@@ -123,6 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:textSize="19sp"
                 android:text="Content of Story"
                 android:textColor="@color/black"/>
 

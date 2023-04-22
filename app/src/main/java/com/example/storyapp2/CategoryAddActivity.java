@@ -43,16 +43,15 @@ public class CategoryAddActivity extends AppCompatActivity {
         });
     }
 
-
-//    private String nameCategory = "";
+    private String nameCategory ="";
+    private int idCategory = 0;
     private void addCategory() {
         //lấy dữ liệu
-        String nameCategory = binding.categoryEt.getText().toString().trim();
+        nameCategory = binding.categoryEt.getText().toString().trim();
         if (TextUtils.isEmpty(nameCategory)) {
             Toast.makeText(this, "Vui lòng nhập thể loại...", Toast.LENGTH_SHORT).show();
         }else{
-            nameCategory = binding.categoryEt.getText().toString().trim();
-            Category category = new Category(nameCategory);
+            Category category = new Category(idCategory,nameCategory);
 
             if(isCategoryExist(category)){
                 //da ton tai

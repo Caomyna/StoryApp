@@ -72,5 +72,11 @@ public class SearchActivity extends AppCompatActivity{
 
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (storyAdapter != null) {
+            storyAdapter.release();
+        }
+    }
 }
