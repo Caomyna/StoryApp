@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,9 +23,6 @@ public class AdminListStoryActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<Story> listStory;
     private AdminStoryAdapter adminStoryAdapter;
-    private Story story;
-    private StoryAppDatabase storyAppDatabase;
-    private ImageView editBtn, deleteBtn;
 
 
     @Override
@@ -105,31 +101,4 @@ public class AdminListStoryActivity extends AppCompatActivity {
         listStory = StoryAppDatabase.getInstance(this).storyDAO().getListStory();
         adminStoryAdapter.setData(listStory);
     }
-/*
-    private void showStoryByID(int idCategory) {
-        recyclerView = binding.listStoryAdmin;
-        listStory = StoryAppDatabase.getInstance(this).storyDAO().getListStoryByID(idCategory);
-
-        adminStoryAdapter = new AdminStoryAdapter(listStory, new AdminStoryAdapter.OnItemClickListener() {
-            @Override
-            public void onEditItem(int position) {
-
-            }
-
-            @Override
-            public void onDeleteItem(Story story) {
-                onClickDelete(story);
-            }
-        });
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adminStoryAdapter);
-        adminStoryAdapter.setData(listStory);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
- */
 }

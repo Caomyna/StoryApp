@@ -70,7 +70,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Add category button   -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
-        android:backgroundTint="@color/main"
+        android:background="@drawable/shape_btn1"
         android:text="Add"
         android:textColor="@color/white" />
 

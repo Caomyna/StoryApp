@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.storyapp2.adapter.CategoryAdapter;
 import com.example.storyapp2.database.StoryAppDatabase;
 import com.example.storyapp2.databinding.ActivityCategoryAddBinding;
 import com.example.storyapp2.model.Category;
@@ -17,9 +16,6 @@ import java.util.List;
 
 public class CategoryAddActivity extends AppCompatActivity {
 
-    private List<Category> listCategory;
-    private CategoryAdapter categoryAdapter;
-    //view binding
     private ActivityCategoryAddBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +23,7 @@ public class CategoryAddActivity extends AppCompatActivity {
         binding = ActivityCategoryAddBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //handle click, go back
+        //back Btn
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,14 +40,13 @@ public class CategoryAddActivity extends AppCompatActivity {
     }
 
     private String nameCategory ="";
-    private int idCategory = 0;
     private void addCategory() {
         //lấy dữ liệu
         nameCategory = binding.categoryEt.getText().toString().trim();
         if (TextUtils.isEmpty(nameCategory)) {
             Toast.makeText(this, "Vui lòng nhập thể loại...", Toast.LENGTH_SHORT).show();
         }else{
-            Category category = new Category(idCategory,nameCategory);
+            Category category = new Category(nameCategory);
 
             if(isCategoryExist(category)){
                 //da ton tai

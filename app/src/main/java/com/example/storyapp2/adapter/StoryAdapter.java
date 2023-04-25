@@ -106,7 +106,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.HolderStoryU
 
     class HolderStoryUser extends RecyclerView.ViewHolder{
         TextView titleTv, authorTv;
-        ImageView image, fav;
+        ImageView image;
 
         public HolderStoryUser(@NonNull View itemView) {
             super(itemView);
@@ -114,8 +114,6 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.HolderStoryU
             titleTv = binding.titleTv;
             authorTv = binding.authorTv;
             image = binding.image;
-            fav = binding.favorite;
-
         }
     }
 

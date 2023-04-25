@@ -16,11 +16,6 @@ import com.example.storyapp2.model.Category;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HomeFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -67,9 +62,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupViewAdapter(ViewPager viewPager) {
-//        viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, getContext());
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
-
         listCategory = new ArrayList<>();
         listCategory = StoryAppDatabase.getInstance(getContext()).categoryDAO().getListCategory();
 

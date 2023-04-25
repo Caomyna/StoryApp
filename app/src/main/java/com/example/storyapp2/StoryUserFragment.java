@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,13 +21,14 @@ import java.util.List;
 public class StoryUserFragment extends Fragment {
     private int idCategory;
     private String nameCategory;
+    private boolean fav;
 
     private StoryAdapter storyAdapter;
     private List<Story> listStory;
     private RecyclerView recyclerView;
     private View view;
-    private ImageView heartIcon;
     private static final String TAG = "STORIES_USER_TAG";
+    private static final int MY_REQUEST = 100;
 
     public StoryUserFragment() {
         // Required empty public constructor
@@ -50,6 +50,7 @@ public class StoryUserFragment extends Fragment {
         if (getArguments() != null) {
             idCategory = getArguments().getInt("idCategory");
             nameCategory = getArguments().getString("nameCategory");
+            fav = getArguments().getBoolean("fav");
 
         } else {
             Log.d("StoryUserFragment", "getArguments() is null");
@@ -71,6 +72,7 @@ public class StoryUserFragment extends Fragment {
                 intent.putExtra("author",author);
                 intent.putExtra("content",content);
                 intent.putExtra("image",image);
+                intent.putExtra("fav", fav);
                 startActivity(intent);
 
             }
@@ -81,25 +83,44 @@ public class StoryUserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        binding = FragmentStoryUserBinding.inflate(LayoutInflater.from(getContext()), container, false);
         view = inflater.inflate(R.layout.fragment_story_user, container, false);
         Log.d(TAG,"onCreateView: Category: "+nameCategory);
 
         //hiển thị list truyện theo thể loại
         loadStoryByCategory(idCategory);
-
         return view;
     }
-/*
-    private void onHeartStatusChanged(boolean fav) {
-        heartIcon = view.findViewById(R.id.favorite);
-        if (fav) {
-            heartIcon.setVisibility(View.VISIBLE);
-        } else {
-            heartIcon.setVisibility(View.INVISIBLE);
-        }
-    }
-*/
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        // Kiểm tra requestCode có trùng với REQUEST_CODE vừa dùng
+//        if(requestCode == MY_REQUEST) {
+//
+//            // resultCode được set bởi DetailActivity
+//            // RESULT_OK chỉ ra rằng kết quả này đã thành công
+//            if(resultCode == RESULT_OK) {
+//                // Nhận dữ liệu từ Intent trả về
+//                int fav_result = data.getIntExtra("fav", fav);
+//                // Sử dụng kết quả result bằng cách hiện Toast
+//                Toast.makeText(getContext(), "Result: " + fav_result, Toast.LENGTH_LONG).show();
+//            } else {
+//                // DetailActivity không thành công, không có data trả về.
+//            }
+//        }
+//    }
+
+    //    private void onHeartStatusChanged(boolean fav) {
+//        heartIcon = view.findViewById(R.id.favorite);
+//        boolean fav = heartIcon.getVisibility();
+//        if (fav) {
+//            heartIcon.setVisibility(View.VISIBLE);
+//        } else {
+//            heartIcon.setVisibility(View.INVISIBLE);
+//        }
+//    }
+
     private void loadStoryByCategory(int idCategory) {
 
         listStory = new ArrayList<>();

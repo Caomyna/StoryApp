@@ -4,7 +4,6 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import com.example.storyapp2.model.Story;
 
@@ -13,10 +12,10 @@ import java.util.List;
 @Dao
 public interface StoryDAO {
 
-    @Query("SELECT * FROM story")
+    @Query("SELECT * FROM story ORDER BY idStory DESC")
     List<Story> getListStory();
 
-    @Query("SELECT * FROM story WHERE idCategory = :idCategory")
+    @Query("SELECT * FROM story WHERE idCategory = :idCategory ORDER BY idStory DESC")
     List<Story> getListStoryByID(int idCategory);
 
     @Query("SELECT * FROM story WHERE title = :title")
@@ -25,10 +24,10 @@ public interface StoryDAO {
     @Insert()
     void insertStory(Story story);
 
-    @Update
-    void updateStory(Story story);
-
     @Delete
     void deleteStory(Story story);
+
+    @Query("DELETE FROM story WHERE idCategory = :idCategory")
+    void deleteStoryByID(int idCategory);
 
 }

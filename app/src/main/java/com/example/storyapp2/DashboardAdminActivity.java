@@ -18,7 +18,6 @@ import com.example.storyapp2.database.StoryAppDatabase;
 import com.example.storyapp2.databinding.ActivityDashboardAdminBinding;
 import com.example.storyapp2.model.Category;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardAdminActivity extends AppCompatActivity {
@@ -45,38 +44,12 @@ public class DashboardAdminActivity extends AppCompatActivity {
                 clickDeleteCategory(category);
             }
         });
-        listCategory = new ArrayList<>();
-        categoryAdapter.setData(listCategory);
 
+        listCategory = StoryAppDatabase.getInstance(this).categoryDAO().getListCategory();
+        categoryAdapter.setData(listCategory);
         recyclerView = binding.categoryRv;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(categoryAdapter);
-
-        loadData();
-
-        //search
-        binding.searchEt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int count, int after) {
-                //được gọi khi người dùng gõ từng chữ cái
-                try {
-                    categoryAdapter.getFilter().filter(s);
-                }catch (Exception e){
-
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
 
         //handle click, logout
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -108,8 +81,29 @@ public class DashboardAdminActivity extends AppCompatActivity {
             }
         });
 
+        //search
+        binding.searchEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int count, int after) {
+                //được gọi khi người dùng gõ từng chữ cái
+                try {
+                    categoryAdapter.getFilter().filter(s);
+                }catch (Exception e){
+
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     private void onClickShowStory(int idCategory) {
@@ -133,6 +127,7 @@ public class DashboardAdminActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //xóa
+                        StoryAppDatabase.getInstance(DashboardAdminActivity.this).storyDAO().deleteStoryByID(category.getIdCategory());
                         StoryAppDatabase.getInstance(DashboardAdminActivity.this).categoryDAO().deleteCategory(category);
                         loadData();
                         Toast.makeText(DashboardAdminActivity.this, "Delete successfully...", Toast.LENGTH_SHORT).show();
@@ -142,10 +137,5 @@ public class DashboardAdminActivity extends AppCompatActivity {
                 .setNegativeButton("Hủy",null)
                 .show();
 
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 }

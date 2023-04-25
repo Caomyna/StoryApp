@@ -101,15 +101,14 @@
                 android:text="Forgot Pasword"
                 android:textColor="@color/gray2"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/loginBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Login"
-                android:padding="15dp"
                 android:layout_marginTop="20dp"
                 android:layout_below="@+id/forgotTv"
-                android:backgroundTint="@color/main"
+                android:background="@drawable/shape_btn1"
                 android:textColor="@color/white"/>
 
         </RelativeLayout>

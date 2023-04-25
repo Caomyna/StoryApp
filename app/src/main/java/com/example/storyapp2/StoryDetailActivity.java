@@ -13,30 +13,22 @@ import com.squareup.picasso.Picasso;
 public class StoryDetailActivity extends AppCompatActivity {
 
     private ActivityStoryDetailBinding binding;
-
+    private boolean fav;
+    private static final int MY_REQUEST = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityStoryDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //handle click, go back
-        binding.backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
         //nhận dữ liệu
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         String title = intent.getStringExtra("title");
         String author = intent.getStringExtra("author");
         String content = intent.getStringExtra("content");
         String image = intent.getStringExtra("image");
-        int type = getIntent().getIntExtra("KEY", 0);
-        final boolean[] fav = {getIntent().getBooleanExtra("FAV", false)};
-
+        String email = intent.getStringExtra("email");
+//        fav = intent.getBooleanExtra("fav", false);
 
         binding.titleTv.setText(title);
         binding.authorTv.setText(author);
@@ -44,26 +36,63 @@ public class StoryDetailActivity extends AppCompatActivity {
         Picasso.get().load(image).placeholder(R.drawable.ic_load).error(R.drawable.ic_image).into(binding.imageIv);
 
         //favorite button
+        /*
+        Favorite storyFav = new Favorite(title,author, content, image, email);
+        for (Favorite favorite: listFav) {
+            if (favorite == storyFav) {
+                fav = true;
+            }else {
+                fav = false;
+            }
+        }
+
+         */
         binding.favoriteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 view.startAnimation(AnimationUtils.loadAnimation(StoryDetailActivity.this, androidx.appcompat.R.anim.abc_fade_in));
 
-                if (fav[0]) {
-
-                    binding.favoriteBtn.setImageResource(R.drawable.ic_favorite_border);
-
-                    fav[0] = false;
-
+                if (fav) {
+                    fav = false;
                 } else {
-
-                    binding.favoriteBtn.setImageResource(R.drawable.ic_favorite);
-                    fav[0] = true;
-
+                    fav = true;
                 }
+                Intent intent = new Intent();
+                intent.putExtra("fav", fav);
+                setResult(RESULT_OK, intent);
+            }
+        });
 
+        //handle click, go back
+        binding.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+                Intent intent = new Intent();
+                intent.putExtra("fav", fav);
+                setResult(RESULT_OK, intent);
             }
         });
 
     }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        // Kiểm tra requestCode có trùng với REQUEST_CODE vừa dùng
+//        if(requestCode == MY_REQUEST) {
+//
+//            // resultCode được set bởi DetailActivity
+//            // RESULT_OK chỉ ra rằng kết quả này đã thành công
+//            if(resultCode == RESULT_OK) {
+//                // Nhận dữ liệu từ Intent trả về
+//                boolean fav_result = data.getIntExtra("fav", fav);
+//                // Sử dụng kết quả result bằng cách hiện Toast
+//                Toast.makeText(this, "Result: " + fav_result, Toast.LENGTH_LONG).show();
+//            } else {
+//                // DetailActivity không thành công, không có data trả về.
+//            }
+//        }
+//    }
 }

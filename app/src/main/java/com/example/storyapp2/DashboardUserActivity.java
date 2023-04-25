@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -22,10 +21,8 @@ import com.google.android.material.navigation.NavigationView;
 public class DashboardUserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
-    private TextView emailTv;
     private
     @NonNull ActivityDashboardUserBinding binding;
-
 
     private static final int FRAGMENT_HOME = 0;
     private static final int FRAGMENT_FAVORITE =1;
@@ -43,7 +40,6 @@ public class DashboardUserActivity extends AppCompatActivity implements Navigati
 
         //thêm toolbar và bắt sự kiện
         setSupportActionBar(binding.toolbar);
-
         drawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout,binding.toolbar, R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
@@ -53,7 +49,6 @@ public class DashboardUserActivity extends AppCompatActivity implements Navigati
         binding.navigationView.setNavigationItemSelectedListener(this);
 
         replaceFragment(new HomeFragment());
-//        navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
 
     }
 

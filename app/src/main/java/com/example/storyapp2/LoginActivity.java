@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.storyapp2.adapter.AccountAdapter;
 import com.example.storyapp2.database.StoryAppDatabase;
 import com.example.storyapp2.databinding.ActivityLoginBinding;
 import com.example.storyapp2.model.Account;
@@ -18,11 +17,7 @@ import com.example.storyapp2.model.Account;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
-
-    private AccountAdapter accountAdapter;
     private List<Account> listAccount;
-
-    //view binding
     private ActivityLoginBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
     private void validateData() {
         //Trước khi tạo tài khoản, kiểm tra dữ liệu có hợp lệ k
         //get data
-
         email = binding.emailEt.getText().toString().trim();
         password = binding.passwordEt.getText().toString().trim();
 

@@ -31,11 +31,10 @@ public class MainActivity extends AppCompatActivity {
         binding.skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, DashboardUserActivity.class));
+                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
             }
         });
+
     }
-
-
 //id:25
 }

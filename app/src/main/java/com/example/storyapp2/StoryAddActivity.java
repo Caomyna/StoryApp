@@ -20,45 +20,18 @@ import java.util.List;
 
 public class StoryAddActivity extends AppCompatActivity {
 
-    public static final String TAG = StoryAppDatabase.class.getName();
     private static final int MY_REQUEST_CODE = 10;
     private ActivityStoryAddBinding binding;
     private StoryAppDatabase storyAppDatabase;
     private List<Category> listCategory;
 
-    /*
-    private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    Log.e(TAG, "onActivityResult");
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        //
-                        Intent data = result.getData();
-                        if (data == null) {
-                            return;
-                        }
-                        Uri uri = data.getData(); //dữ liệu ảnh chọn từ gallery
-//                        mUri = uri;
-                        try {
-                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                            imgUpload.setImageBitmap(bitmap);
-                        }catch (IOException e){
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-    )
-*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityStoryAddBinding.inflate(getLayoutInflater());
          setContentView(binding.getRoot());
 
-        //handle click, backBtn
+        //backBtn
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,7 +126,6 @@ public class StoryAddActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
-
 
     private boolean isStoryExist(Story st) {
         List<Story> list = StoryAppDatabase.getInstance(this).storyDAO().checkStory(st.getTitle());

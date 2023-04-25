@@ -75,9 +75,7 @@ public class AdminStoryAdapter extends RecyclerView.Adapter<AdminStoryAdapter.Ho
         //set data
         holder.titleTv.setText(title);
         holder.authorTv.setText(author);
-
         Picasso.get().load(image).placeholder(R.drawable.ic_load).error(R.drawable.ic_image).into(holder.imageView);
-
 
         //handle click show story details
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -97,8 +95,6 @@ public class AdminStoryAdapter extends RecyclerView.Adapter<AdminStoryAdapter.Ho
             }
         });
 
-        //editBtn
-//        holder.editBtn
 
     }
 

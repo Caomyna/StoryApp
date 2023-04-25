@@ -13,7 +13,7 @@ import com.example.storyapp2.model.Account;
 import com.example.storyapp2.model.Category;
 import com.example.storyapp2.model.Story;
 
-@Database(entities = {Story.class, Account.class, Category.class}, version = 2)
+@Database(entities = {Story.class, Account.class, Category.class}, version = 2, exportSchema = false)
 public abstract class StoryAppDatabase extends RoomDatabase {
 
     static Migration migration_from_1_to_2 = new Migration(1,2) {
@@ -22,6 +22,7 @@ public abstract class StoryAppDatabase extends RoomDatabase {
             database.execSQL("ALTER TABLE 'story' ADD COLUMN 'idCategory' INTEGER NOT NULL DEFAULT 0");
         }
     };
+
     private static final String DATABASE_NAME = "storyapp.db";
     private static StoryAppDatabase instance;
 

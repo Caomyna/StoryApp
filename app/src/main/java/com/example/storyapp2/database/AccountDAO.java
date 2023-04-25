@@ -14,7 +14,6 @@ import java.util.List;
 public interface AccountDAO {
 
     @Query("SELECT * FROM account")
-//    Cursor getListAccount();
     List<Account> getListAccount();
 
     @Query("SELECT * FROM account WHERE email= :email AND password= :password AND role = :role")
