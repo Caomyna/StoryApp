@@ -10,7 +10,7 @@
         android:id="@+id/toolbarRL"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@drawable/shape_toolbar2">
+        android:background="@color/main">
 
 <!--        Button back-->
         <ImageButton
@@ -27,7 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Story Details"
-            android:textColor="@color/white"/>
+            android:textSize="17sp"
+            android:textColor="@color/white" />
 
 
     </RelativeLayout>

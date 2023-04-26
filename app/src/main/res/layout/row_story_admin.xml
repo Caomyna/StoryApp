@@ -46,7 +46,7 @@
         <ImageButton
             android:id="@+id/editBtn"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_below="@+id/authorTv"
             android:layout_toEndOf="@+id/image"
             android:background="@color/white"
@@ -55,7 +55,7 @@
         <ImageButton
             android:id="@+id/deleteButton"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_below="@+id/authorTv"
             android:layout_toEndOf="@+id/editBtn"
             android:background="@color/white"

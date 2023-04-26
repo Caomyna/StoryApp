@@ -27,6 +27,7 @@
     </RelativeLayout>
 
     <!--Search category -->
+    <!--
     <EditText
         android:id="@+id/searchEt"
         android:layout_width="match_parent"
@@ -39,14 +40,14 @@
         android:hint="Search"
         android:drawableStart="@drawable/ic_search"
         android:textColor="@color/gray1"/>
-
+    -->
     <!--Categories -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoryRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomLl"
-        android:layout_below="@+id/searchEt"
+        android:layout_below="@+id/toolbarRL"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"

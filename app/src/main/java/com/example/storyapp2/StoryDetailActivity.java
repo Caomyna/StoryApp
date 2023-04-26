@@ -2,8 +2,10 @@ package com.example.storyapp2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +16,7 @@ public class StoryDetailActivity extends AppCompatActivity {
 
     private ActivityStoryDetailBinding binding;
     private boolean fav;
-    private static final int MY_REQUEST = 100;
+    private ImageView ivFavorite;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,77 +24,71 @@ public class StoryDetailActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         //nhận dữ liệu
-        final Intent intent = getIntent();
-        String title = intent.getStringExtra("title");
-        String author = intent.getStringExtra("author");
-        String content = intent.getStringExtra("content");
-        String image = intent.getStringExtra("image");
-        String email = intent.getStringExtra("email");
-//        fav = intent.getBooleanExtra("fav", false);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            String title = bundle.getString("title");
+            String author = bundle.getString("author");
+            String content = bundle.getString("content");
+            String image = bundle.getString("image");
+            fav = getIntent().getBooleanExtra("fav", false);
 
-        binding.titleTv.setText(title);
-        binding.authorTv.setText(author);
-        binding.contentTv.setText(content);
-        Picasso.get().load(image).placeholder(R.drawable.ic_load).error(R.drawable.ic_image).into(binding.imageIv);
+            binding.titleTv.setText(title);
+            binding.authorTv.setText(author);
+            binding.contentTv.setText(content);
+            Picasso.get().load(image).placeholder(R.drawable.ic_load).error(R.drawable.ic_image).into(binding.imageIv);
 
-        //favorite button
-        /*
-        Favorite storyFav = new Favorite(title,author, content, image, email);
-        for (Favorite favorite: listFav) {
-            if (favorite == storyFav) {
-                fav = true;
-            }else {
-                fav = false;
-            }
         }
 
-         */
-        binding.favoriteBtn.setOnClickListener(new View.OnClickListener() {
+        //Fav Btn
+        ivFavorite = findViewById(R.id.favoriteBtn);
+        ivFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 view.startAnimation(AnimationUtils.loadAnimation(StoryDetailActivity.this, androidx.appcompat.R.anim.abc_fade_in));
-
                 if (fav) {
+                    ivFavorite.setImageResource(R.drawable.ic_favorite_border);
                     fav = false;
                 } else {
+                    ivFavorite.setImageResource(R.drawable.ic_favorite);
                     fav = true;
                 }
                 Intent intent = new Intent();
-                intent.putExtra("fav", fav);
+                intent.putExtra("isOn", fav);
+                Log.d("isOn", String.valueOf(fav));
                 setResult(RESULT_OK, intent);
             }
         });
 
-        //handle click, go back
+        //back Btn
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+    }
+/*
+    private void setHeart() {
+
+        ivFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.startAnimation(AnimationUtils.loadAnimation(StoryDetailActivity.this, androidx.appcompat.R.anim.abc_fade_in));
+                listStory = StoryAppDatabase.getInstance(StoryDetailActivity.this).storyDAO().getListStory();
+                if (fav) {
+                    ivFavorite.setImageResource(R.drawable.ic_favorite_border);
+                    fav = false;
+                } else {
+                    ivFavorite.setImageResource(R.drawable.ic_favorite);
+                    fav = true;
+                }
                 Intent intent = new Intent();
-                intent.putExtra("fav", fav);
+                intent.putExtra("isOn", fav);
                 setResult(RESULT_OK, intent);
             }
         });
 
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        // Kiểm tra requestCode có trùng với REQUEST_CODE vừa dùng
-//        if(requestCode == MY_REQUEST) {
-//
-//            // resultCode được set bởi DetailActivity
-//            // RESULT_OK chỉ ra rằng kết quả này đã thành công
-//            if(resultCode == RESULT_OK) {
-//                // Nhận dữ liệu từ Intent trả về
-//                boolean fav_result = data.getIntExtra("fav", fav);
-//                // Sử dụng kết quả result bằng cách hiện Toast
-//                Toast.makeText(this, "Result: " + fav_result, Toast.LENGTH_LONG).show();
-//            } else {
-//                // DetailActivity không thành công, không có data trả về.
-//            }
-//        }
-//    }
+ */
 }

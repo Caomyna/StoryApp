@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +28,7 @@ public class StoryUserFragment extends Fragment {
     private List<Story> listStory;
     private RecyclerView recyclerView;
     private View view;
+    private ImageView ivFavorite;
     private static final String TAG = "STORIES_USER_TAG";
     private static final int MY_REQUEST = 100;
 
@@ -50,8 +52,7 @@ public class StoryUserFragment extends Fragment {
         if (getArguments() != null) {
             idCategory = getArguments().getInt("idCategory");
             nameCategory = getArguments().getString("nameCategory");
-            fav = getArguments().getBoolean("fav");
-
+            fav = getArguments().getBoolean("isOn",false);
         } else {
             Log.d("StoryUserFragment", "getArguments() is null");
         }
@@ -62,7 +63,7 @@ public class StoryUserFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 Story story = listStory.get(position);
-                Intent intent = new Intent(getContext(), StoryDetailActivity.class);
+                Intent intent = new Intent(getActivity(), StoryDetailActivity.class);
                 String title = story.getTitle();
                 String author = story.getAuthor();
                 String content = story.getContent();
@@ -88,38 +89,11 @@ public class StoryUserFragment extends Fragment {
 
         //hiển thị list truyện theo thể loại
         loadStoryByCategory(idCategory);
+
+        //favBtn
+        ivFavorite = view.findViewById(R.id.favorite);
         return view;
     }
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        // Kiểm tra requestCode có trùng với REQUEST_CODE vừa dùng
-//        if(requestCode == MY_REQUEST) {
-//
-//            // resultCode được set bởi DetailActivity
-//            // RESULT_OK chỉ ra rằng kết quả này đã thành công
-//            if(resultCode == RESULT_OK) {
-//                // Nhận dữ liệu từ Intent trả về
-//                int fav_result = data.getIntExtra("fav", fav);
-//                // Sử dụng kết quả result bằng cách hiện Toast
-//                Toast.makeText(getContext(), "Result: " + fav_result, Toast.LENGTH_LONG).show();
-//            } else {
-//                // DetailActivity không thành công, không có data trả về.
-//            }
-//        }
-//    }
-
-    //    private void onHeartStatusChanged(boolean fav) {
-//        heartIcon = view.findViewById(R.id.favorite);
-//        boolean fav = heartIcon.getVisibility();
-//        if (fav) {
-//            heartIcon.setVisibility(View.VISIBLE);
-//        } else {
-//            heartIcon.setVisibility(View.INVISIBLE);
-//        }
-//    }
 
     private void loadStoryByCategory(int idCategory) {
 
@@ -140,4 +114,5 @@ public class StoryUserFragment extends Fragment {
             storyAdapter.release();
         }
     }
+
 }

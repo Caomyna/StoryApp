@@ -1,6 +1,5 @@
 package com.example.storyapp2.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,17 +20,15 @@ import java.util.List;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> implements Filterable {
     //view binding
     private RowCategoryBinding binding;
-    private Context context;
     public List<Category> listCategory, filterList;
-
     private OnItemClickListener onClick;
-
     //instance of out filter class
     private FilterCategory filter;
 
 
     public interface OnItemClickListener{
         void onClickItemCategory(int id);
+        void updateCategory(Category category);
         void deleteCategory(Category category);
     }
     public void setOnItemClickListener(OnItemClickListener onClick) {
@@ -56,7 +53,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public CategoryAdapter.CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //bind row_category.xml
         binding = RowCategoryBinding.inflate(LayoutInflater.from(parent.getContext()), parent,false);
-
         return new CategoryViewHolder(binding.getRoot());
     }
 
@@ -82,13 +78,22 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             }
         });
 
-        //handle click delete
+        //deleteBtn
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClick.deleteCategory(category);
             }
         });
+
+        //editBtn
+        holder.updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClick.updateCategory(category);
+            }
+        });
+
     }
 
     @Override
@@ -111,12 +116,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     //View holder class to hold IU views for row_category.xml
     public class CategoryViewHolder extends RecyclerView.ViewHolder{
         private TextView categoryTv;
-        private ImageButton deleteBtn;
+        private ImageButton deleteBtn, updateBtn;
         public CategoryViewHolder(@NonNull View itemView) {
 
             super(itemView);
             categoryTv = binding.categoryTv;
             deleteBtn = binding.deleteBtn;
+            updateBtn = binding.editBtn;
         }
     }
 }

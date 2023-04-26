@@ -50,8 +50,6 @@
             android:layout_below="@+id/authorTv"
             android:layout_toEndOf="@+id/image"
             android:padding="20dp"
-            android:visibility="invisible"
-            android:src="@drawable/ic_favorite"
             android:background="@color/white"/>
 
     </RelativeLayout>

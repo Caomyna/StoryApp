@@ -24,6 +24,13 @@
             android:textColor="@color/black"/>
 
         <ImageButton
+            android:id="@+id/editBtn"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:src="@drawable/ic_edit" />
+
+        <ImageButton
             android:id="@+id/deleteBtn"
             android:layout_width="40dp"
             android:layout_height="50dp"

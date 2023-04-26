@@ -32,7 +32,7 @@ public class AdminStoryAdapter extends RecyclerView.Adapter<AdminStoryAdapter.Ho
 
     public interface OnItemClickListener {
         void onItemClick(int position);
-        void onEditItem(int position);
+        void onEditItem(Story story);
         void onDeleteItem(Story story);
     }
 
@@ -92,6 +92,14 @@ public class AdminStoryAdapter extends RecyclerView.Adapter<AdminStoryAdapter.Ho
             @Override
             public void onClick(View view) {
                 onClick.onDeleteItem(story);
+            }
+        });
+
+        //editBtn
+        holder.editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClick.onEditItem(story);
             }
         });
 

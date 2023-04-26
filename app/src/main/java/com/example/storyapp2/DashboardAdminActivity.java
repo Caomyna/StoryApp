@@ -1,14 +1,14 @@
 package com.example.storyapp2;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +26,7 @@ public class DashboardAdminActivity extends AppCompatActivity {
     private List<Category> listCategory;
     private RecyclerView recyclerView;
     private ActivityDashboardAdminBinding binding;
+    private static final int MY_REQUEST_CODE = 11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,11 @@ public class DashboardAdminActivity extends AppCompatActivity {
             @Override
             public void onClickItemCategory(int id) {
                 onClickShowStory(id);
+            }
+
+            @Override
+            public void updateCategory(Category category) {
+                onClickUpdateCategory(category);
             }
 
             @Override
@@ -80,32 +86,27 @@ public class DashboardAdminActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        //search
-        binding.searchEt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int count, int after) {
-                //được gọi khi người dùng gõ từng chữ cái
-                try {
-                    categoryAdapter.getFilter().filter(s);
-                }catch (Exception e){
-
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
     }
 
+    //cập nhật tên thể loại
+    private void onClickUpdateCategory(Category category) {
+        Intent intent = new Intent(DashboardAdminActivity.this, CategoryUpdateActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("object_category", category);
+        intent.putExtras(bundle);
+        startActivityForResult(intent,MY_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == MY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            loadData();
+        }
+    }
+
+    //hiển thị truyện theo thể loại
     private void onClickShowStory(int idCategory) {
         Intent intent = new Intent(this, AdminListStoryActivity.class);
         Bundle bundle = new Bundle();

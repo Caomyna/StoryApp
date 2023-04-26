@@ -1,5 +1,6 @@
 package com.example.storyapp2;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +25,7 @@ public class AdminListStoryActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<Story> listStory;
     private AdminStoryAdapter adminStoryAdapter;
+    private static final int MY_REQUEST_CODE = 10;
 
 
     @Override
@@ -66,8 +69,8 @@ public class AdminListStoryActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onEditItem(int position) {
-
+            public void onEditItem(Story story) {
+                updateStory(story);
             }
 
             @Override
@@ -79,6 +82,14 @@ public class AdminListStoryActivity extends AppCompatActivity {
         recyclerView.setAdapter(adminStoryAdapter);
         adminStoryAdapter.setData(listStory);
 
+    }
+
+    private void updateStory(Story story) {
+        Intent intent = new Intent(AdminListStoryActivity.this, StoryUpdateActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("object_story", story);
+        intent.putExtras(bundle);
+        startActivityForResult(intent,MY_REQUEST_CODE);
     }
 
     private void onClickDelete(final Story story) {
@@ -100,5 +111,14 @@ public class AdminListStoryActivity extends AppCompatActivity {
     private void loadData() {
         listStory = StoryAppDatabase.getInstance(this).storyDAO().getListStory();
         adminStoryAdapter.setData(listStory);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == MY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            loadData();
+        }
     }
 }

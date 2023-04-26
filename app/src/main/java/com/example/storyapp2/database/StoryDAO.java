@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.storyapp2.model.Story;
 
@@ -29,5 +30,8 @@ public interface StoryDAO {
 
     @Query("DELETE FROM story WHERE idCategory = :idCategory")
     void deleteStoryByID(int idCategory);
+
+    @Update
+    void updateStory(Story story);
 
 }
