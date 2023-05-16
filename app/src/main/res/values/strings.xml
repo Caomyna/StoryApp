@@ -2,9 +2,10 @@
     <string name="app_name">Story App</string>
     <string name="new_user_signup">New User? <b> SignUp</b></string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="nav_home">Home</string>
-    <string name="nav_favorite">Favorite</string>
-    <string name="nav_logout">Logout</string>
+    <string name="nav_home" size="20sp">Home</string>
+    <string name="nav_favorite" size="20sp">Favorite</string>
+    <string name="nav_info" size="20sp">Introduce</string>
+    <string name="nav_logout" size="20sp">Logout</string>
 
     <string name="navigation_drawer_open">Open navigation</string>
     <string name="navigation_drawer_close">Close navigation</string>

@@ -52,7 +52,7 @@ public class DashboardUserActivity extends AppCompatActivity implements Navigati
 
         replaceFragment(new HomeFragment());
 
-        //hiển thị email trong header
+        //hiển thị username trong header
         View headerView = binding.navigationView.getHeaderView(0);
         TextView info = headerView.findViewById(R.id.info);
         info.setText(StoryAppDatabase.user_current.getName());
@@ -86,7 +86,13 @@ public class DashboardUserActivity extends AppCompatActivity implements Navigati
                 currentFragment = FRAGMENT_FAVORITE;
             }
 
-        } else if (id == R.id.nav_logout) {
+        }else if (id == R.id.nav_info) {
+            if (currentFragment != FRAGMENT_FAVORITE) {
+                replaceFragment(new IntroduceFragment());
+                currentFragment = FRAGMENT_FAVORITE;
+            }
+
+        }else if (id == R.id.nav_logout) {
 
             View logoutBtn = findViewById(R.id.nav_logout);
             logoutBtn.setOnClickListener(new View.OnClickListener() {
