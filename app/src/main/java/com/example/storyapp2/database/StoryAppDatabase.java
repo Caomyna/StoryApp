@@ -11,10 +11,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.storyapp2.model.Account;
 import com.example.storyapp2.model.Category;
+import com.example.storyapp2.model.Comment;
 import com.example.storyapp2.model.Favorite;
 import com.example.storyapp2.model.Story;
 
-@Database(entities = {Story.class, Account.class, Category.class, Favorite.class}, version = 3, exportSchema = false)
+@Database(entities = {Story.class, Account.class, Category.class, Favorite.class, Comment.class}, version = 5, exportSchema = false)
 public abstract class StoryAppDatabase extends RoomDatabase {
 
     static Migration migration_from_1_to_2 = new Migration(1,2) {
@@ -31,6 +32,20 @@ public abstract class StoryAppDatabase extends RoomDatabase {
         }
     };
 
+    static final Migration migration_from_3_to_4 = new Migration(3, 4) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE 'comment' ('idCmt' INTEGER NOT NULL PRIMARY KEY, 'id_story' INTEGER NOT NULL,'id_account' INTEGER NOT NULL, 'comment' TEXT,FOREIGN KEY('id_account') REFERENCES 'account'('id') ON DELETE CASCADE, FOREIGN KEY('id_story') REFERENCES 'story'('idStory') ON DELETE CASCADE)");
+        }
+    };
+
+    static Migration migration_from_4_to_5 = new Migration(4,5) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE 'comment' ADD COLUMN 'username' TEXT");
+        }
+    };
+
     private static final String DATABASE_NAME = "storyapp.db";
     private static StoryAppDatabase instance;
 
@@ -40,6 +55,8 @@ public abstract class StoryAppDatabase extends RoomDatabase {
                     .allowMainThreadQueries()
                     .addMigrations(migration_from_1_to_2)
                     .addMigrations(migration_from_2_to_3)
+                    .addMigrations(migration_from_3_to_4)
+                    .addMigrations(migration_from_4_to_5)
                     .build();
         }
         return instance;
@@ -54,5 +71,7 @@ public abstract class StoryAppDatabase extends RoomDatabase {
     public abstract CategoryDAO categoryDAO();
 
     public abstract FavDAO favDAO();
+
+    public abstract CommentDAO commentDAO();
 
 }

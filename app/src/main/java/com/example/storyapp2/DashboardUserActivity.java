@@ -55,7 +55,7 @@ public class DashboardUserActivity extends AppCompatActivity implements Navigati
         //hiển thị email trong header
         View headerView = binding.navigationView.getHeaderView(0);
         TextView info = headerView.findViewById(R.id.info);
-        info.setText(StoryAppDatabase.user_current.getEmail());
+        info.setText(StoryAppDatabase.user_current.getName());
 
     }
 

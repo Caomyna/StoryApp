@@ -1,5 +1,6 @@
 package com.example.storyapp2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -76,6 +77,16 @@ public class StoryDetailActivity extends AppCompatActivity {
             }
         });
 
+        //CommentBtn
+        binding.commentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StoryDetailActivity.this, CommentActivity.class);
+                intent.putExtra("idStory", idStory);
+                startActivity(intent);
+            }
+        });
+
         //back Btn
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,28 +100,5 @@ public class StoryDetailActivity extends AppCompatActivity {
         favList = StoryAppDatabase.getInstance(this).favDAO().checkIsFavorite(idStory, idAccount);
         return favList != null && !favList.isEmpty();
     }
-/*
-    private void setHeart() {
 
-        ivFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                view.startAnimation(AnimationUtils.loadAnimation(StoryDetailActivity.this, androidx.appcompat.R.anim.abc_fade_in));
-                listStory = StoryAppDatabase.getInstance(StoryDetailActivity.this).storyDAO().getListStory();
-                if (fav) {
-                    ivFavorite.setImageResource(R.drawable.ic_favorite_border);
-                    fav = false;
-                } else {
-                    ivFavorite.setImageResource(R.drawable.ic_favorite);
-                    fav = true;
-                }
-                Intent intent = new Intent();
-                intent.putExtra("isOn", fav);
-                setResult(RESULT_OK, intent);
-            }
-        });
-
-    }
-
- */
 }

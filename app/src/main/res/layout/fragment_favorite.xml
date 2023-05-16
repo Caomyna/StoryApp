@@ -7,14 +7,33 @@
     android:background="@drawable/back01"
     tools:context=".FavoriteFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favorite_stories"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        app:stackFromEnd="true"
-        app:reverseLayout="true"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/row_story"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:paddingTop="15dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="10dp"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:drawableStart="@drawable/ic_favorite"
+            android:text="  Yêu thích"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favorite_stories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:stackFromEnd="true"
+            app:reverseLayout="true"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/row_story"/>
+
+    </LinearLayout>
 
 </FrameLayout>
