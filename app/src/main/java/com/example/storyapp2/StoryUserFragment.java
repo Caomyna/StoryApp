@@ -30,7 +30,6 @@ public class StoryUserFragment extends Fragment {
     private View view;
     private ImageView ivFavorite;
     private static final String TAG = "STORIES_USER_TAG";
-    private static final int MY_REQUEST = 100;
 
     public StoryUserFragment() {
         // Required empty public constructor
@@ -64,16 +63,17 @@ public class StoryUserFragment extends Fragment {
             public void onItemClick(int position) {
                 Story story = listStory.get(position);
                 Intent intent = new Intent(getActivity(), StoryDetailActivity.class);
+                int idStory = story.getIdStory();
                 String title = story.getTitle();
                 String author = story.getAuthor();
                 String content = story.getContent();
                 String image = story.getImage();
 
+                intent.putExtra("idStory", idStory);
                 intent.putExtra("title",title);
                 intent.putExtra("author",author);
                 intent.putExtra("content",content);
                 intent.putExtra("image",image);
-                intent.putExtra("fav", fav);
                 startActivity(intent);
 
             }

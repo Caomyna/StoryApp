@@ -30,6 +30,14 @@ public class Account {
         this.role = role;
     }
 
+    public Account() {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
     public int getId() {
         return id;
     }

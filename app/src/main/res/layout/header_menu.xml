@@ -12,5 +12,15 @@
         android:layout_marginLeft="20dp"
         android:src="@drawable/logo"/>
 
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" @gmail.com"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:layout_marginLeft="20dp"
+        android:drawableStart="@drawable/ic_person"/>
+
 
 </LinearLayout>

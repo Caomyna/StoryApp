@@ -13,14 +13,17 @@ import java.util.List;
 @Dao
 public interface StoryDAO {
 
-    @Query("SELECT * FROM story ORDER BY idStory DESC")
+    @Query("SELECT * FROM story")
     List<Story> getListStory();
 
-    @Query("SELECT * FROM story WHERE idCategory = :idCategory ORDER BY idStory DESC")
+    @Query("SELECT * FROM story WHERE idCategory = :idCategory")
     List<Story> getListStoryByID(int idCategory);
 
     @Query("SELECT * FROM story WHERE title = :title")
     List<Story> checkStory(String title);
+
+  @Query("SELECT * FROM story WHERE idStory = :id ")
+    Story getListFavStory(int id);
 
     @Insert()
     void insertStory(Story story);

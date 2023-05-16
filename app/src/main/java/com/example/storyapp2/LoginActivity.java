@@ -4,6 +4,7 @@ package com.example.storyapp2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
@@ -71,6 +72,9 @@ public class LoginActivity extends AppCompatActivity {
         if(isAccountExist(accountUser)){
             //da ton tai
             Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
+            StoryAppDatabase.user_current = listAccount.get(0);
+            Log.d("loginUser: ", String.valueOf(StoryAppDatabase.user_current.getId()));
+
             //truyền dữ liệu
             Intent intent = new Intent(LoginActivity.this, DashboardUserActivity.class);
             startActivity(intent);

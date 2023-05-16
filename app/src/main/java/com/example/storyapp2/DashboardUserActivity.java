@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -15,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.storyapp2.database.StoryAppDatabase;
 import com.example.storyapp2.databinding.ActivityDashboardUserBinding;
 import com.google.android.material.navigation.NavigationView;
 
@@ -49,6 +51,11 @@ public class DashboardUserActivity extends AppCompatActivity implements Navigati
         binding.navigationView.setNavigationItemSelectedListener(this);
 
         replaceFragment(new HomeFragment());
+
+        //hiển thị email trong header
+        View headerView = binding.navigationView.getHeaderView(0);
+        TextView info = headerView.findViewById(R.id.info);
+        info.setText(StoryAppDatabase.user_current.getEmail());
 
     }
 
